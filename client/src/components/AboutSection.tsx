@@ -68,14 +68,16 @@ const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('about');
   const [activeCategory, setActiveCategory] = useState('languages');
   
-  // Custom animation variants
+  // Custom animation variants with smooth looping transitions
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
+        delayChildren: 0.2,
+        ease: "easeInOut",
+        duration: 0.7
       }
     }
   };
@@ -85,7 +87,10 @@ const AboutSection = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { 
+        duration: 0.7, 
+        ease: [0.43, 0.13, 0.23, 0.96] 
+      }
     }
   };
   
@@ -94,19 +99,29 @@ const AboutSection = () => {
     visible: { 
       width: '100%',
       transition: { 
-        duration: 0.8, 
-        ease: "easeInOut"
+        duration: 1.2, 
+        ease: [0.43, 0.13, 0.23, 0.96]
       }
     }
   };
   
   const tabVariants = {
-    inactive: { opacity: 0.7, y: 0 },
+    inactive: { 
+      opacity: 0.7, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
     active: { 
       opacity: 1, 
       y: -3,
       color: 'var(--color-accent)',
-      transition: { duration: 0.3 }
+      transition: { 
+        duration: 0.5, 
+        ease: [0.43, 0.13, 0.23, 0.96] 
+      }
     }
   };
   
@@ -181,7 +196,12 @@ const AboutSection = () => {
                           scale: [1, 1.05, 1],
                           opacity: [0.2, 0.3, 0.2],
                         }}
-                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                        transition={{ 
+                          duration: 8, 
+                          repeat: Infinity, 
+                          ease: "easeInOut",
+                          repeatType: "reverse"
+                        }}
                       />
                       <img 
                         src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" 
@@ -211,7 +231,12 @@ const AboutSection = () => {
                     <motion.div
                       className="absolute -bottom-6 -left-6 glass-card py-1.5 px-3 rounded-full shadow-lg"
                       animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                      transition={{ 
+                        duration: 5, 
+                        repeat: Infinity, 
+                        ease: "easeInOut",
+                        repeatType: "reverse" 
+                      }}
                     >
                       <div className="flex items-center gap-2">
                         <i className="fas fa-code text-[var(--color-accent)]"></i>
@@ -404,11 +429,14 @@ const AboutSection = () => {
                             className="h-full rounded-full"
                             style={{ 
                               background: 'var(--gradient-primary)',
-                              width: `${skill.level}%` 
                             }}
                             initial={{ width: 0 }}
                             animate={{ width: `${skill.level}%` }}
-                            transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
+                            transition={{ 
+                              duration: 1.5, 
+                              delay: 0.3 + index * 0.1,
+                              ease: [0.43, 0.13, 0.23, 0.96]
+                            }}
                           />
                         </div>
                       </motion.div>
@@ -468,7 +496,12 @@ const AboutSection = () => {
                         <motion.div 
                           className="w-8 h-8 rounded-full bg-[var(--gradient-primary)] flex items-center justify-center shadow-lg text-xs font-bold"
                           animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity, repeatDelay: index }}
+                          transition={{ 
+                            duration: 3, 
+                            repeat: Infinity, 
+                            ease: "easeInOut",
+                            repeatType: "reverse" 
+                          }}
                         >
                           <span className="text-[var(--color-darker)]">{item.year}</span>
                         </motion.div>
@@ -503,8 +536,15 @@ const AboutSection = () => {
           }
           
           @keyframes typing {
-            0%, 100% { width: 0 }
-            50%, 90% { width: 100% }
+            0% { width: 0 }
+            20% { width: 100% }
+            80% { width: 100% }
+            100% { width: 0 }
+          }
+          
+          @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--color-accent) }
           }
         `}
       </style>
