@@ -46,17 +46,45 @@
   }
 
   .gradient-text {
-    background: var(--gradient-primary);
+    background: linear-gradient(120deg, #4DA8FF, #64FFDA, #FF7E67, #4DA8FF);
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradient-animation 8s ease infinite;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .accent-gradient-text {
-    background: var(--gradient-accent);
+    background: linear-gradient(120deg, #64FFDA, #339989, #4DA8FF, #64FFDA);
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: accent-gradient-animation 6s ease infinite;
+  }
+  
+  @keyframes accent-gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .glass-card {
