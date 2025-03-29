@@ -20,11 +20,13 @@ const ParticleBackground = () => {
   
   // Colors that match our new color scheme
   const colors = [
-    'rgba(77, 168, 255, 0.6)',  // Primary blue
+    'rgba(77, 168, 255, 0.6)',   // Primary blue
     'rgba(100, 255, 218, 0.5)',  // Accent teal
     'rgba(100, 255, 218, 0.3)',  // Lighter teal
     'rgba(77, 168, 255, 0.3)',   // Lighter blue
     'rgba(255, 126, 103, 0.4)',  // Highlight
+    'rgba(88, 101, 242, 0.5)',   // Discord blue
+    'rgba(114, 137, 218, 0.4)',  // Discord light blue
   ];
   
   useEffect(() => {
@@ -105,17 +107,25 @@ const ParticleBackground = () => {
               opacity: particle.opacity + opacityBoost,
               filter: particle.blur > 0 ? `blur(${particle.blur}px)` : 'none',
               boxShadow: distance < 20 ? `0 0 ${Math.ceil((20 - distance) / 5)}px ${particle.color}` : 'none',
+              transform: distance < 10 ? `scale(${1.2 + (10 - distance) / 20})` : 'scale(1)',
+              transition: 'transform 0.3s ease-out'
             }}
             animate={{
-              y: [0, -30, 0],
-              x: [0, particle.id % 2 === 0 ? 10 : -10, 0],
+              y: [0, particle.id % 3 === 0 ? -40 : -20, 0],
+              x: [0, particle.id % 4 === 0 ? 15 : (particle.id % 2 === 0 ? 8 : -8), 0],
               scale: [1, scale, 1],
+              opacity: [
+                particle.opacity, 
+                particle.opacity + 0.2,
+                particle.opacity
+              ],
             }}
             transition={{
               duration: particle.duration,
               delay: particle.delay,
               repeat: Infinity,
               ease: "easeInOut",
+              repeatType: "reverse"
             }}
           />
         );

@@ -352,11 +352,33 @@ const DiscordSection = () => {
         
         .discord-message {
           box-shadow: 0 8px 30px rgba(88, 101, 242, 0.15);
+          animation: float 5s ease-in-out infinite;
         }
         
         .typing-animation-discord {
           overflow: hidden;
           border-right: none;
+        }
+        
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.15);
+          }
+          50% {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(88, 101, 242, 0.1);
+          }
+          100% {
+            transform: translateY(0px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.15);
+          }
+        }
+        
+        .glass-card:hover {
+          transform: translateY(-5px);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          box-shadow: 0 15px 30px rgba(88, 101, 242, 0.2);
         }
       `}} />
     </section>

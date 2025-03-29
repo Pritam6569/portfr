@@ -167,27 +167,64 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 1.3 }}
             >
               <motion.a 
-                href="#projects" 
+                href="#about" 
                 className="px-8 py-3.5 rounded-md font-medium transition-all text-[var(--color-darker)] relative overflow-hidden group"
                 style={{ background: 'var(--gradient-primary)' }}
-                whileHover={{ y: -3, boxShadow: "0 15px 30px -10px rgba(77, 168, 255, 0.3)" }}
+                whileHover={{ 
+                  y: -3, 
+                  boxShadow: "0 15px 30px -10px rgba(77, 168, 255, 0.3)",
+                  scale: 1.03 
+                }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10">View My Work</span>
+                <span className="relative z-10">About Me</span>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-[#64FFDA] to-[#4DA8FF] opacity-0 group-hover:opacity-100"
                   transition={{ duration: 0.3 }}
                 />
+                <motion.span
+                  className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#64FFDA]"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "loop"
+                  }}
+                />
               </motion.a>
               
               <motion.a 
-                href="#contact" 
+                href="#discord" 
                 className="px-8 py-3.5 rounded-md font-medium transition-all relative overflow-hidden group"
-                style={{ background: 'rgba(100, 255, 218, 0.1)', border: '1px solid rgba(100, 255, 218, 0.3)' }}
-                whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(100, 255, 218, 0.2)" }}
+                style={{ background: 'rgba(88, 101, 242, 0.1)', border: '1px solid rgba(88, 101, 242, 0.3)' }}
+                whileHover={{ 
+                  y: -3, 
+                  boxShadow: "0 10px 30px -10px rgba(88, 101, 242, 0.3)",
+                  scale: 1.03
+                }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10 text-[var(--color-accent)]">Contact Me</span>
+                <span className="relative z-10 text-[#5865F2]">Connect on Discord</span>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-[#5865F2] to-[#7289DA] opacity-0 group-hover:opacity-10"
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.span
+                  className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#5865F2]"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    delay: 0.5
+                  }}
+                />
               </motion.a>
             </motion.div>
             

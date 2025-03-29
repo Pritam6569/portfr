@@ -13,9 +13,12 @@
     --color-darker: #060d19;
     --color-light: #E2E8F0;
     --color-muted: #94A3B8;
+    --color-discord: #5865F2;
+    --color-discord-light: #7289DA;
     --gradient-primary: linear-gradient(135deg, #4DA8FF 0%, #0B62CC 100%);
     --gradient-secondary: linear-gradient(135deg, #64FFDA 0%, #4DA8FF 100%);
     --gradient-accent: linear-gradient(135deg, #64FFDA 0%, #339989 100%);
+    --gradient-discord: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Inter', sans-serif;
   }
@@ -91,5 +94,62 @@
     background: rgba(10, 25, 41, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .discord-gradient-text {
+    background: linear-gradient(120deg, #5865F2, #7289DA, #99AAB5, #5865F2);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: discord-gradient-animation 8s ease infinite;
+  }
+  
+  @keyframes discord-gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .floating-animation {
+    animation: floating 6s ease-in-out infinite;
+  }
+  
+  @keyframes floating {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .pulse-animation {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
