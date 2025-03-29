@@ -168,8 +168,8 @@ const HeroSection = () => {
             >
               <motion.a 
                 href="#about" 
-                className="px-8 py-3.5 rounded-md font-medium transition-all text-[var(--color-darker)] relative overflow-hidden group"
-                style={{ background: 'var(--gradient-primary)' }}
+                className="px-8 py-3.5 rounded-md font-medium transition-all text-[#060d19] relative overflow-hidden group"
+                style={{ background: 'linear-gradient(135deg, #4DA8FF 0%, #0B62CC 100%)' }}
                 whileHover={{ 
                   y: -3, 
                   boxShadow: "0 15px 30px -10px rgba(77, 168, 255, 0.3)",
@@ -209,7 +209,7 @@ const HeroSection = () => {
               >
                 <span className="relative z-10 text-[#5865F2]">Connect on Discord</span>
                 <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-[#5865F2] to-[#7289DA] opacity-0 group-hover:opacity-10"
+                  className="absolute inset-0 bg-gradient-to-r from-[#5865F2] to-[#7289DA] opacity-0 group-hover:opacity-20"
                   transition={{ duration: 0.3 }}
                 />
                 <motion.span

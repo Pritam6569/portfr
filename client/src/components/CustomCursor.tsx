@@ -1,26 +1,66 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useCursor } from "../hooks/use-cursor";
+
+type CursorSize = "normal" | "large";
 
 const CustomCursor = () => {
-  const { cursorRef, cursorSize, updateCursorPosition, updateCursorSize } = useCursor();
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const [cursorSize, setCursorSize] = useState<CursorSize>("normal");
   const [isVisible, setIsVisible] = useState(false);
   const [innerPosition, setInnerPosition] = useState({ x: 0, y: 0 });
   const [clicking, setClicking] = useState(false);
-  const [trailPositions, setTrailPositions] = useState<{x: number, y: number}[]>([]);
+  const [trailPositions, setTrailPositions] = useState<{x: number, y: number, id: number}[]>([]);
+  const trailIdRef = useRef(0);
+
+  // Throttle mousemove events for better performance
+  const throttle = useCallback((callback: Function, limit: number) => {
+    let wait = false;
+    return function(...args: any[]) {
+      if (!wait) {
+        callback(...args);
+        wait = true;
+        setTimeout(() => {
+          wait = false;
+        }, limit);
+      }
+    };
+  }, []);
+
+  const updateCursorPosition = useCallback((e: MouseEvent) => {
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    }
+  }, []);
+
+  const updateCursorSize = useCallback((size: CursorSize) => {
+    setCursorSize(size);
+  }, []);
+
+  // Add positions to trail with throttling for performance
+  const updateTrailPositions = useCallback(
+    throttle((x: number, y: number) => {
+      const id = trailIdRef.current++;
+      setTrailPositions(prev => {
+        const newPositions = [...prev, { x, y, id }];
+        return newPositions.slice(-5); // Keep only the latest 5 positions
+      });
+    }, 50),
+    []
+  );
 
   useEffect(() => {
+    // Skip on server-side rendering
+    if (typeof document === 'undefined') return;
+    
+    // Don't initialize on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    
     // Set up event listeners
     const handleMouseMove = (e: MouseEvent) => {
       updateCursorPosition(e);
       setInnerPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
-      
-      // Add position to trail with a limit of 5 positions
-      setTrailPositions(prev => {
-        const newPositions = [...prev, { x: e.clientX, y: e.clientY }];
-        return newPositions.slice(-5);
-      });
+      updateTrailPositions(e.clientX, e.clientY);
     };
     
     const handleMouseLeave = () => {
@@ -56,6 +96,40 @@ const CustomCursor = () => {
       element.addEventListener('mouseleave', handleElementLeave);
     });
 
+    // Use MutationObserver to handle dynamically added elements
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.addedNodes.length) {
+          mutation.addedNodes.forEach(node => {
+            if (node instanceof HTMLElement) {
+              if (
+                node.tagName === 'A' || 
+                node.tagName === 'BUTTON' || 
+                node.tagName === 'INPUT' || 
+                node.tagName === 'TEXTAREA' ||
+                node.getAttribute('role') === 'button'
+              ) {
+                node.addEventListener('mouseenter', handleElementEnter);
+                node.addEventListener('mouseleave', handleElementLeave);
+              }
+              
+              // Check children of added node
+              const childInteractive = node.querySelectorAll('a, button, input, textarea, [role="button"]');
+              childInteractive.forEach(el => {
+                el.addEventListener('mouseenter', handleElementEnter);
+                el.addEventListener('mouseleave', handleElementLeave);
+              });
+            }
+          });
+        }
+      });
+    });
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
     return () => {
       // Clean up event listeners
       document.removeEventListener("mousemove", handleMouseMove);
@@ -68,16 +142,23 @@ const CustomCursor = () => {
         element.removeEventListener('mouseenter', handleElementEnter);
         element.removeEventListener('mouseleave', handleElementLeave);
       });
+      
+      observer.disconnect();
     };
-  }, [updateCursorPosition, updateCursorSize]);
+  }, [updateCursorPosition, updateTrailPositions]);
+
+  // Don't render cursor on touch devices or server-side
+  if (typeof window === 'undefined' || (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)) {
+    return null;
+  }
 
   return isVisible ? (
     <>
       {/* Cursor trail effect */}
       {trailPositions.map((pos, index) => (
         <motion.div
-          key={index}
-          className="pointer-events-none fixed z-49 rounded-full bg-[var(--color-primary)]"
+          key={pos.id}
+          className="pointer-events-none fixed z-49 rounded-full bg-[#4DA8FF]"
           style={{
             position: 'fixed',
             top: pos.y,
@@ -103,7 +184,7 @@ const CustomCursor = () => {
           position: 'fixed',
           top: 0,
           left: 0,
-          borderColor: clicking ? 'var(--color-highlight)' : 'var(--color-accent)'
+          borderColor: clicking ? '#FF7E67' : '#64FFDA'
         }}
         animate={{
           width: clicking ? 40 : (cursorSize === "large" ? 70 : 30),
@@ -126,7 +207,7 @@ const CustomCursor = () => {
           top: innerPosition.y,
           left: innerPosition.x,
           transform: 'translate(-50%, -50%)',
-          background: clicking ? 'var(--color-highlight)' : 'var(--color-primary)',
+          background: clicking ? '#FF7E67' : '#4DA8FF',
         }}
         animate={{
           width: clicking ? 8 : 6,
@@ -142,7 +223,7 @@ const CustomCursor = () => {
       {/* Highlight effect on click */}
       {clicking && (
         <motion.div
-          className="pointer-events-none fixed z-48 rounded-full bg-[var(--color-highlight)]"
+          className="pointer-events-none fixed z-48 rounded-full bg-[#FF7E67]"
           style={{
             position: 'fixed',
             top: innerPosition.y,
