@@ -11,7 +11,7 @@ const DiscordSection = () => {
   const { staggerContainer, fadeInUp, slideInLeft, slideInRight, scaleUp } = useAnimationValues();
   
   const handleCopyDiscordUsername = () => {
-    navigator.clipboard.writeText('pritam');
+    navigator.clipboard.writeText('pritam.');
     toast({
       title: "Username Copied!",
       description: "Discord username copied to clipboard.",
@@ -118,7 +118,7 @@ const DiscordSection = () => {
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold flex items-center">
-                  pritam
+                  pritam.
                   <span className="ml-2 text-xs text-[#B9BBBE] py-0.5 px-1.5 rounded bg-[rgba(255,255,255,0.1)]">
                     User
                   </span>
@@ -150,7 +150,7 @@ const DiscordSection = () => {
             </motion.button>
             
             <div className="mt-4 text-xs text-center text-[#B9BBBE]">
-              My Discord username: <span className="text-white">pritam</span>
+              My Discord username: <span className="text-white">pritam.</span>
             </div>
           </motion.div>
           
@@ -243,7 +243,7 @@ const DiscordSection = () => {
             <div className="w-10 h-10 rounded-full bg-[#5865F2] flex items-center justify-center text-white font-bold">P</div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <span className="font-medium text-[#FFFFFF]">pritam</span>
+                <span className="font-medium text-[#FFFFFF]">pritam.</span>
                 <span className="text-xs text-[#B9BBBE]">Today at {new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
               </div>
               <div className="mt-1 text-white typing-animation-discord">
