@@ -11,8 +11,7 @@ import ParticleBackground from "./components/ParticleBackground";
 import Navigation from "./components/Navigation";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
-import ProjectsSection from "./components/ProjectsSection";
-import ContactSection from "./components/ContactSection";
+import DiscordSection from "./components/DiscordSection";
 import Footer from "./components/Footer";
 
 function PortfolioPage() {
@@ -22,14 +21,16 @@ function PortfolioPage() {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         
-        const href = this.getAttribute('href');
+        const element = this as HTMLAnchorElement;
+        const href = element.getAttribute('href');
         if (!href) return;
         
         const targetElement = document.querySelector(href);
         
         if (targetElement) {
+          const top = targetElement.getBoundingClientRect().top + window.scrollY;
           window.scrollTo({
-            top: targetElement.offsetTop,
+            top,
             behavior: 'smooth'
           });
         }
@@ -71,8 +72,7 @@ function PortfolioPage() {
       <Navigation />
       <HeroSection />
       <AboutSection />
-      <ProjectsSection />
-      <ContactSection />
+      <DiscordSection />
       <Footer />
     </motion.div>
   );

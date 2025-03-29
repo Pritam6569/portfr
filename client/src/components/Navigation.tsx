@@ -67,7 +67,7 @@ const Navigation = () => {
         </motion.a>
         
         <div className="hidden md:flex space-x-8">
-          {['home', 'about', 'projects', 'contact'].map((item, index) => (
+          {['home', 'about', 'discord'].map((item, index) => (
             <motion.a 
               key={item}
               href={`#${item}`} 
@@ -160,7 +160,7 @@ const Navigation = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.4 }}
             >
-              {['home', 'about', 'projects', 'contact'].map((item, index) => (
+              {['home', 'about', 'discord'].map((item, index) => (
                 <motion.a 
                   key={item}
                   href={`#${item}`} 
