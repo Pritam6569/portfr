@@ -69,6 +69,7 @@ const HeroSection = () => {
             duration: 8,
             ease: "easeInOut",
             repeat: Infinity,
+            repeatType: "reverse"
           }}
         />
         <motion.div 
@@ -87,6 +88,7 @@ const HeroSection = () => {
             duration: 10,
             ease: "easeInOut",
             repeat: Infinity,
+            repeatType: "reverse",
             delay: 1
           }}
         />
@@ -144,7 +146,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                I <span className="accent-gradient-text">{animatedText}</span>
+                I <span className="accent-gradient-text inline-block min-w-[180px]">{animatedText}</span>
               </motion.h3>
               
               <motion.p 
@@ -355,7 +357,12 @@ const HeroSection = () => {
                   backdropFilter: 'blur(5px)'
                 }}
                 animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ 
+                  duration: 6, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  repeatType: "loop" 
+                }}
               />
               <motion.div 
                 className="absolute -bottom-10 -left-8 w-20 h-20"
@@ -366,7 +373,13 @@ const HeroSection = () => {
                   backdropFilter: 'blur(5px)'
                 }}
                 animate={{ y: [10, -10, 10] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                transition={{ 
+                  duration: 5, 
+                  repeat: Infinity, 
+                  ease: "easeInOut", 
+                  delay: 1,
+                  repeatType: "loop" 
+                }}
               />
             </div>
           </motion.div>
@@ -375,7 +388,12 @@ const HeroSection = () => {
         <motion.div 
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center"
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ 
+            duration: 2.5, 
+            repeat: Infinity, 
+            ease: "easeInOut", 
+            repeatType: "loop" 
+          }}
         >
           <div className="text-[var(--color-accent)]">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -393,12 +411,14 @@ const HeroSection = () => {
             border-right: 2px solid #64FFDA;
             overflow: hidden;
             white-space: nowrap;
-            animation: typing 3.5s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
+            animation: typing 4s steps(30) infinite, blink-caret 0.75s step-end infinite;
           }
           
           @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
+            0% { width: 0 }
+            20% { width: 100% }
+            80% { width: 100% }
+            100% { width: 0 }
           }
           
           @keyframes blink-caret {
