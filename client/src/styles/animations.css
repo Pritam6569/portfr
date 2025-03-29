@@ -1,0 +1,207 @@
+/* Custom cursor styling */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #6C63FF;
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* Gradient text animation */
+.gradient-text {
+  background: linear-gradient(45deg, #6C63FF, #FF6584, #4ECDC4, #FFC857);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Blob animation */
+@keyframes morph {
+  0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+  25% { border-radius: 73% 27% 26% 74% / 73% 25% 75% 27%; }
+  50% { border-radius: 28% 72% 44% 56% / 49% 40% 60% 51%; }
+  75% { border-radius: 40% 60% 70% 30% / 47% 62% 38% 53%; }
+}
+
+/* Diagonal sections */
+.diagonal-section {
+  clip-path: polygon(0 0, 100% 5%, 100% 95%, 0 100%);
+}
+
+.diagonal-section-reversed {
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
+}
+
+/* Project card effects */
+.project-card {
+  transition: all 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.project-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Skills pill effects */
+.skills-pill {
+  transition: all 0.3s ease;
+}
+
+.skills-pill:hover {
+  transform: scale(1.1);
+}
+
+/* Navigation underline effect */
+.nav-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Code typing effect */
+.typed-code {
+  border-right: 2px solid #6C63FF;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #6C63FF }
+}
+
+/* Social icon animations */
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.2);
+}
+
+/* Glowing border effect */
+.glowing-border {
+  position: relative;
+}
+
+.glowing-border::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  z-index: -1;
+  background: linear-gradient(45deg, #6C63FF, #FF6584, #4ECDC4, #FFC857);
+  background-size: 400% 400%;
+  border-radius: inherit;
+  animation: shimmer 3s ease infinite;
+}
+
+/* Wave effect for footer */
+.wave {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%236C63FF" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,170.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-size: cover;
+}
+
+/* Custom colors for specific elements */
+.text-primary {
+  color: #6C63FF;
+}
+
+.text-secondary {
+  color: #FF6584;
+}
+
+.text-accent {
+  color: #4ECDC4;
+}
+
+.text-highlight {
+  color: #FFC857;
+}
+
+.text-energy {
+  color: #FF5A5F;
+}
+
+.bg-primary {
+  background-color: #6C63FF;
+}
+
+.bg-secondary {
+  background-color: #FF6584;
+}
+
+.bg-accent {
+  background-color: #4ECDC4;
+}
+
+.bg-highlight {
+  background-color: #FFC857;
+}
+
+.bg-energy {
+  background-color: #FF5A5F;
+}
+
+.border-primary {
+  border-color: #6C63FF;
+}
+
+.border-secondary {
+  border-color: #FF6584;
+}
+
+.border-accent {
+  border-color: #4ECDC4;
+}
+
+.border-highlight {
+  border-color: #FFC857;
+}
+
+.border-energy {
+  border-color: #FF5A5F;
+}
