@@ -1,13 +1,67 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
+  :root {
+    --color-primary: #4DA8FF;
+    --color-secondary: #0A1929;
+    --color-accent: #64FFDA;
+    --color-highlight: #FF7E67;
+    --color-dark: #111827;
+    --color-darker: #060d19;
+    --color-light: #E2E8F0;
+    --color-muted: #94A3B8;
+    --gradient-primary: linear-gradient(135deg, #4DA8FF 0%, #0B62CC 100%);
+    --gradient-secondary: linear-gradient(135deg, #64FFDA 0%, #4DA8FF 100%);
+    --gradient-accent: linear-gradient(135deg, #64FFDA 0%, #339989 100%);
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Inter', sans-serif;
+  }
+
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-[var(--color-darker)] text-foreground;
+    font-family: var(--font-primary);
+    color: var(--color-light);
+    background: radial-gradient(circle at 5% 5%, #192c46 0%, var(--color-darker) 40%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+  }
+
+  p {
+    font-family: var(--font-secondary);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .accent-gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card {
+    background: rgba(10, 25, 41, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
