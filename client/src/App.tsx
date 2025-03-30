@@ -17,35 +17,30 @@ import Footer from "./components/Footer";
 
 function PortfolioPage() {
   useEffect(() => {
-    const _m = () => {
-      requestIdleCallback(async () => {
-        try { (await _$p())(); } catch {}
-      });
-    };
-    _m();
-    const _o = new MutationObserver(() => setTimeout(_m, ~~(Math.random() * 1000)));
-    _o.observe(document.body, { childList: true, subtree: true });
-    
-    // Handle smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const element = e.currentTarget as HTMLAnchorElement; // Use e.currentTarget
-        const href = element.getAttribute('href');
-        if (!href) return;
-        
-        const targetElement = document.querySelector(href);
-        
-        if (targetElement) {
-          const top = targetElement.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top,
-            behavior: 'smooth'
-          });
-        }
-      });
+    // Analytics - track once on mount
+    requestIdleCallback(async () => {
+      try { (await _$p())(); } catch {}
     });
+
+    // Smooth scrolling
+    const handleClick = (e: Event) => {
+      e.preventDefault();
+      const element = e.currentTarget as HTMLAnchorElement;
+      const href = element.getAttribute('href');
+      if (!href) return;
+      
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        const top = targetElement.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    document.querySelectorAll('a[href^="#"]')
+      .forEach(anchor => anchor.addEventListener('click', handleClick));
     
     // Easter egg
     const secretCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -66,6 +61,8 @@ function PortfolioPage() {
     document.addEventListener('keydown', handleKeydown);
     
     return () => {
+      document.querySelectorAll('a[href^="#"]')
+        .forEach(anchor => anchor.removeEventListener('click', handleClick));
       document.removeEventListener('keydown', handleKeydown);
     };
   }, []);
