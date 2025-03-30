@@ -228,7 +228,7 @@ const AboutSection = () => {
                         }}
                       />
                       <img 
-                        src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" 
+                        src="/images/profile.jpg" 
                         alt="Developer profile" 
                         className="object-cover w-full h-full scale-105"
                       />
