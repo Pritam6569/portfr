@@ -33,32 +33,56 @@ const journeyItems = [
   {
     year: '2018',
     title: 'Started Coding Journey',
-    description: 'Began learning web development fundamentals and building my first projects.'
+    description: 'Began learning web development fundamentals and building my first projects.',
+    icon: 'fas fa-laptop-code',
+    color: '#4DA8FF',
+    skills: ['HTML', 'CSS', 'JavaScript'],
+    achievement: 'Built first portfolio website'
   },
   {
     year: '2019',
     title: 'First Freelance Project',
-    description: 'Developed my first client website and discovered my passion for front-end development.'
+    description: 'Developed my first client website and discovered my passion for front-end development.',
+    icon: 'fas fa-briefcase',
+    color: '#64FFDA',
+    skills: ['React', 'SCSS', 'Responsive Design'],
+    achievement: 'Completed 3 client projects'
   },
   {
     year: '2020',
     title: 'Full Stack Exploration',
-    description: 'Expanded my skills to include backend technologies and database management.'
+    description: 'Expanded my skills to include backend technologies and database management.',
+    icon: 'fas fa-server',
+    color: '#FF7E67',
+    skills: ['Node.js', 'Express', 'MongoDB'],
+    achievement: 'Created a full-stack e-commerce application'
   },
   {
     year: '2021',
     title: 'Joined Developer Community',
-    description: 'Started contributing to open-source projects and attending developer meetups.'
+    description: 'Started contributing to open-source projects and attending developer meetups.',
+    icon: 'fas fa-users',
+    color: '#9580FF',
+    skills: ['Git', 'GitHub', 'Team Collaboration'],
+    achievement: '10+ open-source contributions'
   },
   {
     year: '2022',
     title: 'Advanced Projects',
-    description: 'Created complex web applications with focus on performance and user experience.'
+    description: 'Created complex web applications with focus on performance and user experience.',
+    icon: 'fas fa-rocket',
+    color: '#3FDAA4',
+    skills: ['TypeScript', 'NextJS', 'TailwindCSS'],
+    achievement: 'Launched SaaS platform with 1000+ users'
   },
   {
     year: 'Now',
     title: 'Continuous Evolution',
-    description: 'Constantly learning new technologies and pushing the boundaries of my creativity.'
+    description: 'Constantly learning new technologies and pushing the boundaries of my creativity.',
+    icon: 'fas fa-infinity',
+    color: '#F95738',
+    skills: ['Web3', 'AI Integration', 'Advanced Animations'],
+    achievement: 'Building innovative digital experiences'
   }
 ];
 
@@ -442,7 +466,7 @@ const AboutSection = () => {
               </motion.div>
             )}
             
-            {/* Journey Tab */}
+            {/* Journey Tab - Redesigned */}
             {activeTab === 'journey' && (
               <motion.div
                 key="journey-tab"
@@ -450,58 +474,179 @@ const AboutSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="max-w-3xl mx-auto"
+                className="w-full"
               >
-                <motion.div 
-                  className="relative"
+                {/* Journey intro */}
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-center mb-16"
                 >
-                  {/* Timeline line */}
-                  <div className="absolute left-[15px] md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-[rgba(77,168,255,0.3)]"></div>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">My Development <span className="gradient-text">Timeline</span></h2>
+                  <div className="h-1 w-24 bg-[var(--color-accent)] rounded mb-6 mx-auto"></div>
+                  <p className="max-w-2xl mx-auto text-[var(--color-muted)]">A visual representation of my professional growth and key milestones in my development journey.</p>
+                </motion.div>
+                
+                {/* Journey timeline - modern card design */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 relative">
+                  {/* Background shimmer effect */}
+                  <motion.div 
+                    className="absolute inset-y-0 left-1/2 transform -translate-x-1/2 w-1"
+                    style={{
+                      background: "linear-gradient(to bottom, rgba(77,168,255,0.1), rgba(77,168,255,0.3), rgba(100,255,218,0.3), rgba(255,126,103,0.3))"
+                    }}
+                    animate={{
+                      backgroundPosition: ['0% 0%', '0% 100%'],
+                    }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
                   
-                  {/* Timeline items */}
-                  {journeyItems.map((item, index) => (
-                    <motion.div 
-                      key={item.year}
-                      className={`mb-12 flex items-start ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
-                    >
-                      <div className={`hidden md:block w-1/2 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                        {index % 2 === 0 && (
-                          <div>
-                            <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                            <p className="text-[var(--color-muted)]">{item.description}</p>
-                          </div>
-                        )}
-                      </div>
-                      
-                      <div className="flex-shrink-0 relative z-10">
-                        <motion.div 
-                          className="w-8 h-8 rounded-full bg-[var(--gradient-primary)] flex items-center justify-center shadow-lg text-xs font-bold"
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ 
-                            duration: 3, 
-                            repeat: Infinity, 
-                            ease: "easeInOut",
-                            repeatType: "reverse" 
-                          }}
+                  {journeyItems.map((item, index) => {
+                    // Determine if the item should be on the left or right
+                    const isLeft = index % 2 === 0;
+                    const gridPos = isLeft 
+                      ? "md:col-span-5 md:col-start-1" 
+                      : "md:col-span-5 md:col-start-7";
+                    
+                    return (
+                      <motion.div 
+                        key={item.year}
+                        className={`${gridPos} relative z-10 md:mb-16`}
+                        initial={{ opacity: 0, y: 30, x: isLeft ? -30 : 30 }}
+                        animate={{ opacity: 1, y: 0, x: 0 }}
+                        transition={{ 
+                          duration: 0.7, 
+                          delay: index * 0.15,
+                          ease: [0.43, 0.13, 0.23, 0.96]
+                        }}
+                        whileHover={{ 
+                          y: -5, 
+                          transition: { 
+                            duration: 0.3 
+                          } 
+                        }}
+                      >
+                        {/* Journey card with gradient border */}
+                        <div 
+                          className="glass-card rounded-xl p-6 border border-opacity-30 relative overflow-hidden group h-full"
+                          style={{ borderColor: item.color }}
                         >
-                          <span className="text-[var(--color-darker)]">{item.year}</span>
-                        </motion.div>
-                      </div>
-                      
-                      <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:hidden pl-6' : 'md:text-left pl-6 md:pl-8'}`}>
-                        <div>
-                          <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                          <p className="text-[var(--color-muted)]">{item.description}</p>
+                          {/* Top accent bar */}
+                          <div 
+                            className="absolute top-0 left-0 w-full h-1"
+                            style={{ background: `linear-gradient(to right, ${item.color}50, ${item.color})` }}
+                          ></div>
+                          
+                          {/* Year badge */}
+                          <div 
+                            className="absolute -top-5 right-5 w-20 h-10 flex items-center justify-center rounded-b-lg shadow-lg text-sm font-bold"
+                            style={{ background: item.color }}
+                          >
+                            <span className="text-white">{item.year}</span>
+                          </div>
+                          
+                          {/* Content */}
+                          <div className="pt-4">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div 
+                                className="w-12 h-12 rounded-lg flex items-center justify-center shadow-lg"
+                                style={{ background: `${item.color}20`, color: item.color }}
+                              >
+                                <i className={`${item.icon} text-xl`}></i>
+                              </div>
+                              <h3 className="text-xl font-bold">{item.title}</h3>
+                            </div>
+                            
+                            <p className="text-[var(--color-muted)] mb-6">{item.description}</p>
+                            
+                            {/* Key skills */}
+                            <div className="mb-4">
+                              <h4 className="text-sm text-[var(--color-muted)] uppercase tracking-wider mb-2">Key Skills</h4>
+                              <div className="flex flex-wrap gap-2">
+                                {item.skills.map((skill, idx) => (
+                                  <motion.span 
+                                    key={idx}
+                                    className="px-3 py-1 rounded-full text-xs font-medium"
+                                    style={{ 
+                                      background: `${item.color}15`, 
+                                      color: item.color,
+                                      border: `1px solid ${item.color}30` 
+                                    }}
+                                    whileHover={{ scale: 1.05 }}
+                                  >
+                                    {skill}
+                                  </motion.span>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            {/* Achievement highlight */}
+                            <div 
+                              className="mt-auto text-sm font-medium py-2 px-3 rounded"
+                              style={{ background: `${item.color}10` }}
+                            >
+                              <span className="text-[var(--color-light)]">
+                                <i className="fas fa-trophy mr-2" style={{ color: item.color }}></i>
+                                {item.achievement}
+                              </span>
+                            </div>
+                          </div>
+                          
+                          {/* Connection dot to timeline */}
+                          <div 
+                            className={`hidden md:block absolute top-1/2 ${isLeft ? 'right-[-30px]' : 'left-[-30px]'} w-6 h-6 rounded-full`}
+                            style={{ background: item.color, border: '3px solid rgb(20, 20, 30)' }}
+                          ></div>
+                          
+                          {/* Animated highlight on hover */}
+                          <motion.div 
+                            className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                            style={{ 
+                              background: `radial-gradient(circle at center, ${item.color}10 0%, transparent 70%)`,
+                              pointerEvents: 'none'
+                            }}
+                            initial={{ scale: 0.8 }}
+                            whileHover={{ scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                          />
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    );
+                  })}
+                </div>
+                
+                {/* Final element with inspiration quote */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.7 }}
+                  className="text-center mt-10 max-w-2xl mx-auto"
+                >
+                  <div className="glass-card p-6 rounded-xl">
+                    <blockquote className="italic text-[var(--color-light)]">
+                      "The most important thing is to never stop questioning and learning."
+                    </blockquote>
+                    <div className="mt-2 font-medium text-[var(--color-accent)]">— My Development Philosophy</div>
+                  </div>
+                  
+                  <motion.div
+                    className="mt-8"
+                    whileHover={{ y: -3 }}
+                  >
+                    <a 
+                      href="#contact"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-[var(--color-darker)] relative overflow-hidden group"
+                      style={{ background: 'var(--gradient-primary)' }}
+                    >
+                      <span>Ready to collaborate?</span>
+                      <i className="fas fa-rocket group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  </motion.div>
                 </motion.div>
               </motion.div>
             )}
