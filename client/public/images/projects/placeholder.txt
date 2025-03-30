@@ -1,0 +1,9 @@
+Place your project images here with the following names:
+- task-manager.webp
+- collab-platform.webp
+- 3d-configurator.webp
+- nft-marketplace.webp
+- ai-image-gen.webp
+- analytics-dashboard.webp
+
+For testing, you can use these placeholder images from https://placeholder.com or generate your own project screenshots.
