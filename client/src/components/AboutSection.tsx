@@ -277,23 +277,10 @@ const AboutSection = () => {
                   
                   {/* Personal details with interactive icons */}
                   <motion.div 
-                    className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6"
                     variants={containerVariants}
                   >
-                    <motion.div 
-                      className="flex items-center gap-4 group"
-                      variants={itemVariants}
-                      whileHover={{ x: 5 }}
-                    >
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[rgba(77,168,255,0.1)] border border-[rgba(77,168,255,0.3)] group-hover:bg-[rgba(77,168,255,0.2)] transition-all">
-                        <i className="fas fa-map-marker-alt text-[var(--color-primary)]"></i>
-                      </div>
-                      <div>
-                        <h4 className="text-sm text-[var(--color-muted)]">Location</h4>
-                        <p className="text-[var(--color-light)]">New Delhi, India</p>
-                      </div>
-                    </motion.div>
-                    
+
                     <motion.div 
                       className="flex items-center gap-4 group"
                       variants={itemVariants}
