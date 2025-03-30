@@ -1,18 +1,16 @@
 [build]
 command = "npm run build"
-publish = "dist"
+publish = "./dist/public"
 node_compat = true
 
 [build.environment]
 NODE_VERSION = "18.18.0"
 
-[site]
-bucket = "./dist"
-
+# Production environment settings
 [env.production]
 name = "portfolio-production"
 
-# Optional: Enable caching for better performance
+# Enable caching for better performance
 [cache]
 caching = true
 browser_TTL = 3600
