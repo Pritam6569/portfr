@@ -21,7 +21,7 @@ function PortfolioPage() {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         
-        const element = this as HTMLAnchorElement;
+        const element = e.currentTarget as HTMLAnchorElement; // Use e.currentTarget
         const href = element.getAttribute('href');
         if (!href) return;
         

@@ -62,12 +62,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         path: indexPath,
         exists: false,
         isDirectory: false,
-        size: null
+        size: null as number | null // Allow number or null
       },
       mainTsx: {
         path: path.join(clientDir, "src", "main.tsx"),
         exists: false,
-        size: null
+        size: null as number | null // Allow number or null
       }
     };
     
