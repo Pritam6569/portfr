@@ -1,10 +1,6 @@
-node_modules/
-dist/
-.env
-.env.local
+node_modules
+dist
 .DS_Store
-.vercel
-*.log
-coverage/
-.vite/
-.vscode/
+server/public
+vite.config.ts.*
+*.tar.gz
